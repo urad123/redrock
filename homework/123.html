@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>...</title>
+<meta charset="utf-8">
+<link href="style/css.css" rel="stylesheet">
+</head>
+<body>
+<div class="main"> 
+	<input id="txt" type="text" value="" />
+	<table> 
+	<tr> 
+		<td class="not"></td>
+		<td class="not"></td>
+		<td><input  class="calculate" type="button" onclick="cal(0)" value="%" /></td>
+		<td><input class="calculate" type="button" onclick="clearNum()" value="AC" /></td>
+	</tr>
+	<tr> 
+		<td><input class="number" type="button" onclick="num(0)" value="7" /></td>
+		<td><input class="number" type="button" onclick="num(1)" value="8" /></td>
+		<td><input class="number" type="button" onclick="num(2)" value="9" /></td>
+		<td><input class="calculate" type="button" onclick="cal(2)" value="÷" /></td>
+	</tr>
+	<tr> 
+		<td><input class="number" type="button" onclick="num(3)" value="4" /></td>
+		<td><input class="number" type="button" onclick="num(4)" value="5" /></td>
+		<td><input class="number" type="button" onclick="num(5)" value="6" /></td>
+		<td><input class="calculate" type="button" onclick="cal(3)" value="×" /></td>
+	</tr>
+	<tr> 
+		<td><input class="number" type="button" onclick="num(6)" value="1" /></td>
+		<td><input class="number" type="button" onclick="num(7)" value="2" /></td>
+		<td><input class="number" type="button" onclick="num(8)" value="3" /></td>
+		<td><input class="calculate" type="button" onclick="cal(4)" value="-" /></td>
+	</tr>
+	<tr> 
+		<td><input class="number" type="button" onclick="num(9)" value="0" /></td>
+		<td><input class="number" type="button" onclick="num(10)" value="." /></td>
+		<td><input class="calculate" type="button" onclick="getResult()" value="=" /></td>
+		<td><input class="calculate" type="button" onclick="cal(6)" value="+" /></td>
+	</tr>
+	</table>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+    var isPressEqualsKey = false;
+	function num(num){
+		var tx=document.getElementById('txt');
+		if(isPressEqualsKey)
+		{ 
+			tx.value = ""; 
+			isPressEqualsKey = false;
+		}
+		document.getElementById('txt').value+=document.querySelectorAll('.number')[num].value;
+	}
+	
+	function clearNum(){
+		document.getElementById('txt').value=null;
+	}
+	var op;
+	var first;
+	var second;
+	function cal(control){
+		op=document.querySelectorAll('.calculate')[control].value;
+		var tx=document.getElementById('txt');
+		if(tx.value=="")
+			return false;
+		first=tx.value;
+		
+		tx.value="";
+
+	}
+	function getResult(){
+		var resultNum;
+		var m=parseFloat(first);
+		var tx=document.getElementById('txt');
+		if(op=='+')
+			resultNum=m+parseFloat(tx.value);
+		else if(op=='-')
+			resultNum=m-parseFloat(tx.value);
+		else if(op=='×')
+			resultNum=m*parseFloat(tx.value);
+		else if(op=='÷')
+			resultNum=m/parseFloat(tx.value);
+		else if(op=='%')
+			resultNum=m%parseFloat(tx.value);
+		document.getElementById('txt').value=resultNum;
+		resultNum="";
+		isPressEqualsKey = true;
+		op="";
+	}
+	
+
+</script>
